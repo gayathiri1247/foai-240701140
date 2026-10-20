@@ -1,0 +1,7 @@
+{% extends "base.html" %}{% block title %}Policy Sources{% endblock %}
+{% block content %}
+<div class="page-top"><span class="eyebrow">TRANSPARENCY</span><h1>Policy sources and rules</h1><p class="muted">These published SBI criteria are evaluated against the application. A passing pre-screen is not loan approval; SBI still verifies documents and performs underwriting.</p></div>
+<div class="panel table-panel"><div class="table-responsive"><table class="table align-middle"><thead><tr><th>Loan</th><th>Rule ID</th><th>Description</th><th>Condition</th><th>Status</th><th>Source</th></tr></thead><tbody>
+{% for r in rules %}<tr><td>{{ loans[r.loan_type].name }}</td><td><strong>{{ r.rule_id }}</strong></td><td>{{ r.description }}</td><td>{{ r.condition }}</td><td><span class="status-pill status-not-evaluated">{{ r.verification_status }}</span></td><td><a href="{{ r.source_url }}" target="_blank" rel="noopener">Official page ↗</a><br><small class="muted">Checked: {{ r.last_checked }}</small></td></tr>{% endfor %}
+</tbody></table></div></div>
+{% endblock %}

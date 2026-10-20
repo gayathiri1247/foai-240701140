@@ -1,0 +1,11 @@
+{% extends "base.html" %}{% block title %}Application History{% endblock %}
+{% block content %}
+<div class="page-top"><span class="eyebrow">SAVED SUBMISSIONS</span><h1>Application history</h1><p class="muted">Your local demo submissions are saved to this account.</p></div>
+<div class="panel table-panel">
+{% if rows %}
+<div class="table-responsive"><table class="table align-middle"><thead><tr><th>Reference ID</th><th>Loan type</th><th>Date</th><th>Result</th><th></th></tr></thead><tbody>
+{% for row in rows %}<tr><td class="ref-cell">{{ row.reference_id }}</td><td>{{ loans[row.loan_type].name }}</td><td>{{ row.submitted_at }}</td><td><span class="status-pill status-{{ row.decision|lower|replace(' ','-') }}">{{ row.decision }}</span></td><td><a class="btn btn-sm btn-outline-primary" href="{{ url_for('result', reference_id=row.reference_id) }}">Open result</a></td></tr>{% endfor %}
+</tbody></table></div>
+{% else %}<div class="empty-state"><div class="empty-icon">↗</div><h2>No applications yet</h2><p>Choose a loan and submit an assessment to see it here.</p><a href="{{ url_for('home') }}" class="btn btn-primary">Choose a loan</a></div>{% endif %}
+</div><p class="small muted mt-3">Local educational demo storage only. Do not enter sensitive banking or identity information.</p>
+{% endblock %}

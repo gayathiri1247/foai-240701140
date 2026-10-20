@@ -1,0 +1,13 @@
+{% extends "base.html" %}{% block title %}Register | Loan Eligibility Checker{% endblock %}
+{% block content %}
+<div class="auth-wrap">
+  <div class="auth-intro"><span class="eyebrow">GET STARTED</span><h1>Create your demo account.</h1><p>Register to assess loan details and revisit your saved results.</p></div>
+  <div class="panel auth-panel"><h2>Create account</h2><p class="muted mb-4">Use an email and a password of at least 8 characters.</p>
+  <form method="post">
+    <label class="form-label" for="name">Full name</label><input class="form-control mb-3" id="name" name="name" maxlength="80" required autocomplete="name">
+    <label class="form-label" for="email">Email address</label><input class="form-control mb-3" id="email" name="email" type="email" required autocomplete="email">
+    <label class="form-label" for="password">Password</label><input class="form-control mb-4" id="password" name="password" type="password" minlength="8" required autocomplete="new-password">
+    <button class="btn btn-primary w-100">Create account</button>
+  </form><p class="small text-center mt-4 mb-0">Already registered? <a href="{{ url_for('login') }}">Log in</a></p></div>
+</div>
+{% endblock %}

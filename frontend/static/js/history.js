@@ -1,0 +1,1 @@
+/* History content is rendered from SQLite records. */

@@ -1,0 +1,1 @@
+/* Shared frontend helpers can be added here. */

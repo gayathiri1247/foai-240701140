@@ -1,0 +1,15 @@
+{% extends "base.html" %}{% block title %}Dashboard | SBI Multi-Loan Eligibility Checker{% endblock %}
+{% block content %}
+<section class="hero panel">
+  <div class="hero-copy"><span class="eyebrow">YOUR LOAN PRE-SCREENING WORKSPACE</span><h1>SBI Multi-Loan<br><span>Eligibility Checker</span></h1><p>Enter a few details and review a rule-based assessment with plain-language explanations.</p><a href="#loan-options" class="btn btn-primary btn-lg">Choose a loan <span aria-hidden="true">→</span></a></div>
+  <div class="hero-visual" aria-hidden="true"><div class="visual-circle"><div class="visual-card"><span class="tiny-label">PRE-SCREENING</span><div class="visual-line wide"></div><div class="visual-line"></div><div class="visual-check">✓</div><div class="visual-line short"></div></div></div></div>
+</section>
+<section class="mt-5" id="loan-options"><div class="section-heading"><div><span class="eyebrow">SELECT A PRODUCT</span><h2>What type of loan?</h2></div><a href="{{ url_for('history') }}">View saved applications →</a></div>
+<div class="row g-3 mt-1">
+{% for key, loan in loans.items() %}
+<div class="col-md-6 col-xl-3"><article class="loan-card h-100"><div class="loan-icon">{{ {'personal':'P','home':'H','car':'C','education':'E'}[key] }}</div><h3>{{ loan.name }}</h3><p>{{ loan.description }}</p><a class="btn btn-outline-primary w-100 mt-auto" href="{{ url_for('apply', loan_type=key) }}">Check eligibility</a></article></div>
+{% endfor %}
+</div></section>
+<section class="steps-section mt-5"><div class="section-heading"><div><span class="eyebrow">HOW IT WORKS</span><h2>Three simple steps</h2></div></div><div class="row g-3"><div class="col-md-4"><div class="step-card"><span>01</span><h3>Enter details</h3><p>Complete the form for your selected loan type.</p></div></div><div class="col-md-4"><div class="step-card"><span>02</span><h3>AI rule evaluation</h3><p>The backend checks input quality and applies configured rules.</p></div></div><div class="col-md-4"><div class="step-card"><span>03</span><h3>Understand the result</h3><p>See what passed and which policy checks still need confirmation.</p></div></div></div></section>
+<div class="alert alert-light border mt-4"><strong>Please note:</strong> Assessments apply published SBI scheme checks. SBI must still verify documents, credit history, property or course eligibility and final repayment capacity.</div>
+{% endblock %}

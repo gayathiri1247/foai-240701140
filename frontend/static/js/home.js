@@ -1,0 +1,1 @@
+/* Dashboard navigation is rendered by Flask templates. */

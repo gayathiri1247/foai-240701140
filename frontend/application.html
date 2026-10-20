@@ -1,0 +1,52 @@
+{% extends "base.html" %}{% block title %}{{ loan.name }} Application{% endblock %}
+{% block content %}
+<div class="page-top"><a href="{{ url_for('home') }}" class="back-link">← Dashboard</a><span class="eyebrow d-block mt-3">LOAN APPLICATION</span><h1>{{ loan.name }} pre-screening</h1><p class="muted">Enter accurate demo details. Fields marked * are required.</p></div>
+<div class="row g-4"><div class="col-lg-8"><form id="loan-form" class="panel form-panel">
+<input type="hidden" name="loan_type" value="{{ loan_type }}">
+<div class="form-section"><h2>Applicant details</h2><div class="row g-3">
+{% if loan_type != 'education' %}
+<div class="col-md-6"><label class="form-label" for="age">Age * (years)</label><input class="form-control" id="age" name="age" type="number" min="18" max="100" required></div>
+{% else %}
+<div class="col-md-6"><label class="form-label" for="nationality">Nationality *</label><select class="form-select" id="nationality" name="nationality" required><option value="">Choose</option><option>Indian</option><option>Other</option></select></div>
+{% endif %}
+{% if loan_type == 'personal' %}
+<div class="col-md-6"><label class="form-label">Nationality *</label><select class="form-select" name="nationality" required><option value="">Choose</option><option>Indian</option><option>Other</option></select></div>
+<div class="col-md-6"><label class="form-label">Employment sector *</label><select class="form-select" name="employment_sector" required><option value="">Choose</option><option>Central Government</option><option>State Government</option><option>Railway</option><option>Police</option><option>PSU</option><option>Defence</option><option>Central Armed Police</option><option>Coast Guard</option><option>Corporate</option><option>Other</option></select></div>
+<div class="col-md-6"><label class="form-label">SBI salary-package account? *</label><select class="form-select" name="salary_account" required><option value="">Choose</option><option value="yes">Yes</option><option value="no">No</option><option value="unknown">Not sure</option></select></div>
+<div class="col-md-6"><label class="form-label">Service duration (years) *</label><input class="form-control" name="service_years" type="number" min="0" step="0.1" required></div>
+<div class="col-md-6"><label class="form-label">Months until retirement or contract end *</label><input class="form-control" name="months_to_retirement" type="number" min="0" required><small class="muted">Use the earlier applicable date. SBI verifies it.</small></div>
+<div class="col-md-6"><label class="form-label">Net monthly salary (₹) *</label><input class="form-control" name="monthly_income" type="number" min="0" required></div>
+{% elif loan_type == 'home' %}
+<div class="col-md-6"><label class="form-label">Resident status *</label><select class="form-select" name="resident_status" required><option value="">Choose</option><option>Resident Indian</option><option>Other</option></select></div>
+<div class="col-md-6"><label class="form-label">Employment type *</label><select class="form-select" name="employment_type" required><option value="">Choose</option><option>Salaried</option><option>Self-employed</option><option>Other</option></select></div>
+<div class="col-md-6"><label class="form-label">Monthly income (₹) *</label><input class="form-control" name="monthly_income" type="number" min="0" required></div>
+<div class="col-md-6"><label class="form-label">Property value (₹) *</label><input class="form-control" name="property_value" type="number" min="1" required></div>
+<div class="col-md-6"><label class="form-label">Down payment (₹) *</label><input class="form-control" name="down_payment" type="number" min="0" required></div>
+{% elif loan_type == 'car' %}
+<div class="col-md-6"><label class="form-label">Applicant category *</label><select class="form-select" name="applicant_category" required><option value="">Choose</option><option>Public/Defence salary package</option><option>Self-employed / business / professional</option><option>Agriculture / allied activities</option></select></div>
+<div class="col-md-6"><label class="form-label">Co-applicant annual income (₹; enter 0 if none) *</label><input class="form-control" name="co_applicant_annual_income" type="number" min="0" value="0" required></div>
+<div class="col-md-6"><label class="form-label">Annual qualifying income (₹) *</label><input class="form-control" name="annual_income" type="number" min="0" required><small class="muted">Self-employed: use ITR income after adding back depreciation and repayments of existing loans. SBI verifies income documents.</small></div>
+<div class="col-md-6"><label class="form-label">On-road vehicle price (₹) *</label><input class="form-control" name="vehicle_price" type="number" min="1" required></div>
+{% elif loan_type == 'education' %}
+<div class="col-md-6"><label class="form-label">Course *</label><input class="form-control" name="course" required></div>
+<div class="col-md-6"><label class="form-label">Institution / category *</label><input class="form-control" name="institution" required></div>
+<div class="col-md-6"><label class="form-label">Institution group *</label><select class="form-select" name="institution_category" required><option value="">Choose</option><option>Top 100 NIRF (applicant declared)</option><option>Other eligible institution</option></select></div>
+<div class="col-md-6"><label class="form-label">Course type *</label><select class="form-select" name="course_category" required><option value="">Choose</option><option>Medical (MBBS/MD/MS)</option><option>Other eligible course</option></select></div>
+<div class="col-md-6"><label class="form-label">Study location *</label><select class="form-select" name="study_location" required><option value="">Choose</option><option>India</option><option>Abroad</option></select></div>
+<div class="col-md-6"><label class="form-label">Admission secured? *</label><select class="form-select" name="admission_status" required><option value="">Choose</option><option value="yes">Yes</option><option value="no">No</option><option value="pending">Pending</option></select></div>
+<div class="col-md-6"><label class="form-label">Parent/guardian co-borrower available? *</label><select class="form-select" name="co_borrower" required><option value="">Choose</option><option value="yes">Yes</option><option value="no">No</option><option value="unknown">Not sure</option></select></div>
+<div class="col-md-6"><label class="form-label">Co-borrower relationship *</label><select class="form-select" name="co_borrower_relation" required><option value="">Choose</option><option>Parent</option><option>Guardian</option><option>Other</option></select></div>
+<div class="col-md-6"><label class="form-label">Tangible collateral available? *</label><select class="form-select" name="collateral_available" required><option value="">Choose</option><option value="yes">Yes</option><option value="no">No</option><option value="unknown">Not sure</option></select><small class="muted">Required for requests above ₹7.5 lakh; SBI assesses acceptability and value.</small></div>
+<div class="col-md-6"><label class="form-label">Total course expenses (₹) *</label><input class="form-control" name="course_expenses" type="number" min="1" required></div>
+{% endif %}
+<div class="col-md-6"><label class="form-label">Existing monthly EMIs (₹) *</label><input class="form-control" name="existing_emi" type="number" min="0" required></div>
+<div class="col-md-6"><label class="form-label">Requested loan amount (₹) *</label><input class="form-control" name="requested_amount" type="number" min="1" required></div>
+<div class="col-md-6"><label class="form-label">Requested tenure (months) *</label><input class="form-control" name="tenure_months" type="number" min="1" max="600" required></div>
+</div></div>
+<div class="form-section"><h2>Optional EMI estimate</h2><p class="small muted">This is only a demonstration rate, not an SBI offer.</p><label class="form-label" for="demo_annual_interest_rate">Demo annual interest rate (%)</label><input class="form-control" id="demo_annual_interest_rate" name="demo_annual_interest_rate" type="number" min="0" max="50" step="0.1" placeholder="Leave blank to skip EMI"></div>
+<div id="form-error" class="alert alert-danger d-none" role="alert"></div>
+<div class="d-flex flex-wrap gap-2"><button class="btn btn-primary btn-lg" id="submit-btn">Evaluate eligibility</button><a href="{{ url_for('home') }}" class="btn btn-light btn-lg">Cancel</a></div>
+</form></div>
+<div class="col-lg-4"><aside class="panel side-note"><h3>Before you submit</h3><ul><li>Use realistic demo values.</li><li>Do not enter identity or bank-account numbers.</li><li>Unknown official criteria will be shown as unresolved.</li></ul><a href="{{ loan.source }}" target="_blank" rel="noopener">Open official SBI source ↗</a></aside></div></div>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='js/application.js') }}"></script>{% endblock %}
